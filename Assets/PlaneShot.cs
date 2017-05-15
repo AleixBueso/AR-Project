@@ -56,7 +56,7 @@ public class PlaneShot : MonoBehaviour
 
 		// Create an instance of the shell and store a reference to it's rigidbody.
 		Rigidbody shellInstance =
-			Instantiate(cam_m_Shell, cam_m_FireTransform.position, cam_m_FireTransform.rotation) as Rigidbody;
+			Instantiate(cam_m_Shell, cam_m_FireTransform.position, cam_m_FireTransform.rotation, GameObject.Find("Game").transform) as Rigidbody;
 
 		// Set the shell's velocity to the launch force in the fire position's forward direction.
 		shellInstance.velocity = cam_m_CurrentLaunchForce * cam_m_FireTransform.forward;
