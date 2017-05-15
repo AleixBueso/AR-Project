@@ -18,10 +18,4 @@ public class TowerAttributes : MonoBehaviour {
 	void Update () {
 		HPBar.value = HitPoints;
 	}
-
-	private void OnCollisionEnter(Collision collision)
-	{
-		if (collision.gameObject.tag == "Shell")
-			HitPoints -= 10;
-	}
 }
