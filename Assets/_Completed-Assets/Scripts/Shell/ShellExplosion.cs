@@ -41,11 +41,6 @@ namespace Complete
 					damaged = true;
 				}
 
-				if (colliders[i].gameObject.tag == "Tank")
-				{
-					colliders[i].GetComponent<TankHealth>().TakeDamage(100);
-				}
-
 				if (!targetRigidbody)
                     continue;
             }

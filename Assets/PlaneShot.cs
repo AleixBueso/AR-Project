@@ -16,9 +16,6 @@ public class PlaneShot : MonoBehaviour
 	private float cam_m_CurrentLaunchForce;         // The force that will be given to the shell when the fire button is released.
 	private bool cam_m_Fired;                       // Whether or not the shell has been launched with this button press.
 
-	public float shotCD = 1f;
-	public float shotTimer = 0f;
-
 	private void Start()
 	{
 		// The fire axis is based on the player number.
@@ -31,19 +28,24 @@ public class PlaneShot : MonoBehaviour
 		//FireCamera();
 
 		// Otherwise, if the fire button has just started being pressed...
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetButtonDown(cam_m_FireButton))
 		{
 			// ... reset the fired flag and reset the launch force.
 			cam_m_Fired = false;
 			cam_m_CurrentLaunchForce = LaunchForce;
-
-			if (shotTimer >= shotCD)
-			{
-				FireCamera();
-				shotTimer = 0;
-			}
 		}
-		shotTimer += Time.deltaTime;
+		// Otherwise, if the fire button is being held and the shell hasn't been launched yet...
+		else if (Input.GetButton(cam_m_FireButton) && !cam_m_Fired)
+		{
+			// Increment the launch force and update the slider.
+			cam_m_CurrentLaunchForce = LaunchForce;
+		}
+		// Otherwise, if the fire button is released and the shell hasn't been launched yet...
+		else if (Input.GetButtonUp(cam_m_FireButton) && !cam_m_Fired)
+		{
+			// ... launch the shell.
+			FireCamera();
+		}
 	}
 
 
