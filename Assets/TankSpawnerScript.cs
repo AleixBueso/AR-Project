@@ -56,15 +56,20 @@ public class TankSpawnerScript : MonoBehaviour {
 				Vector3 position;
 				position = CalculatePosition();
 				bool correctPos = false;
+
+				
 				while (!correctPos)
 				{
-					if (position.x <= 7 && position.x >= -7 && position.z <= 6 && position.z >= -7)
+					if (position.x <= 40 && position.x >= -40 && position.z <= 40 && position.z >= -40)
 						position = CalculatePosition();
 					else
 						correctPos = true;
 				}
 
-				GameObject CreatedTank = Instantiate(Tank, position, Quaternion.identity, GameObject.Find("Terrain").transform);
+				Debug.Log(correctPos + "  " + position);
+
+				GameObject CreatedTank = Instantiate(Tank, Vector3.zero, Quaternion.identity, GameObject.FindGameObjectWithTag("Ground").transform);
+				CreatedTank.transform.localPosition = new Vector3(position.x, position.y, position.z);
 				Tanks.Add(CreatedTank);
 				WaveSpawned++;
 
@@ -85,7 +90,7 @@ public class TankSpawnerScript : MonoBehaviour {
 	public Vector3 CalculatePosition()
 	{
 		Vector3 newPosition;
-		newPosition = new Vector3(Random.Range(-6.28f, 7.6f), 0, Random.Range(-7.44f, 8.14f));
+		newPosition = new Vector3(Random.Range(-50f, 50f), 0, Random.Range(-50f, 50f));
 		return newPosition;
 	}
 }
