@@ -65,6 +65,7 @@ public class TankSpawnerScript : MonoBehaviour {
 				}
 
 				GameObject CreatedTank = Instantiate(Tank, position, Quaternion.identity, GameObject.Find("Terrain").transform);
+				CreatedTank.transform.localPosition.Set(position.x, position.y, position.z);
 				Tanks.Add(CreatedTank);
 				WaveSpawned++;
 
